@@ -1,0 +1,13 @@
+{
+  "name": "proj_mestra",
+  "version": "1.0.0",
+  "description": "Projeto para a nuvem mestra",
+  "main": "index.js",
+  "repository": "https://github.com/gustavoneves/proj_mestra.git",
+  "author": "gustavo neves <gustavo.neves@yandex.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1"
+  }
+}
