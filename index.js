@@ -2,8 +2,6 @@ const express = require('express');
 
 var app = express();
 
-
-//var bodyParser = require('body-parser');
 app.use(express.static('public'));
 
 /*
@@ -60,25 +58,6 @@ async function getData(state, date){
     return response.data["results"];
 }
 
-// async function postData(id, cityData){
-//     const axios = require('axios');
-//     await axios.post('https://us-central1-lms-nuvem-mestra.cloudfunctions.net/testApi', 
-//                 { 
-//                   headers: { 'MeuNome': 'Gustavo' },
-//                   Body: {
-//                       id: id,
-//                       nomeCidade: cityData['city'],
-//                       percentualDeCasos: cityData['increase']
-//                     },
-//                 })
-//                .then(function(response){
-//                     console.log('salvo com sucesso')
-//                 })
-//                 .catch(error => {
-//                     console.log("Error POST request: " + error)
-//                 });
-// }
-
 async function postData(id, cityData){
     const axios = require('axios');
     await axios.post('https://us-central1-lms-nuvem-mestra.cloudfunctions.net/testApi', 
@@ -120,7 +99,6 @@ app.get('/', (req,res) =>{
             dayStart.forEach(el => dayEnd.push(values[1].find(e => e.city == el.city)));
             
             for(j in dayStart){
-                //console.log(dayStart[j]['city'] == dayEnd[j]['city']);
                 var increase = (dayEnd[j]['confirmed'] - dayStart[j]['confirmed']) / dayStart[j]['estimated_population_2019'];
                 increase = increase * 100;
                 cityData = {
@@ -131,8 +109,6 @@ app.get('/', (req,res) =>{
                 arrayCities.push(cityData);
             }
 
-            //console.log(arrayCities[0]);
-            //arrayCities.sort((a, b) => (a.increase < b.increase) ? 1 : -1);
             arrayCities.sort((a, b) => {
                 if(a.increase < b.increase){
                     return 1;
@@ -145,7 +121,6 @@ app.get('/', (req,res) =>{
             }
             
             Promise.all(promCities).then(() => {
-                //console.log(arrayCities);
                 res.send("OK");
             })
             .catch(error => {
@@ -159,7 +134,6 @@ app.get('/', (req,res) =>{
     }
 });
 
-// Para fazer o post http://codeheaven.io/how-to-use-axios-as-your-http-client-pt/
-app.listen(8080, function(){
-    console.log("Ouvindo na porta 8080");
+app.listen(80, function(){
+    console.log("Ouvindo na porta 80");
 });
